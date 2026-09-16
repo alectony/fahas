@@ -5,19 +5,110 @@
 package com.mycompany.mavenproject1;
 
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author CL2-PC
  */
 public class cafe_jframe extends javax.swing.JFrame {
+private int americanoQty = 0;
+private int q2 = 0;
+private int q3 = 0;
+private int q4 = 0;
+private int q5 = 0;
+private int q6 = 0;
+private int q7 = 0;
+private int q8 = 0;
+private int q9 = 0;
+private int q10 = 0;
+private int q11 = 0;
+private int q12 = 0;
+private int currentId = 0;
+
 
     /**
      * Creates new form cafe_jframe
      */
+    
+    
     public cafe_jframe() {
         initComponents();
+        getContentPane().setBackground(Color.BLACK);
+        setLocationRelativeTo(null);
+        tbl1.setBackground(Color.BLACK);
+        tbl1.setForeground(Color.WHITE);
+        tbl1.setGridColor(Color.DARK_GRAY);
+
+        jScrollPane1.getViewport().setBackground(Color.BLACK);
+        jScrollPane1.setBackground(Color.BLACK);
+
+        tbl1.getTableHeader().setBackground(new Color(30, 30, 30));
+        tbl1.getTableHeader().setForeground(Color.DARK_GRAY);
+        
+        
     }
+        
+    public void addtable(String Name, int Quantity, double Price) {
+    DefaultTableModel dt = (DefaultTableModel) tbl1.getModel();
+    
+    // Remove existing "TOTAL" row if it exists before modifying
+    for (int i = 0; i < dt.getRowCount(); i++) {
+        if ("TOTAL".equals(dt.getValueAt(i, 1))) {
+            dt.removeRow(i);
+            break;
+        }
+    }
+
+    boolean isExisting = false;
+
+    // Check if item already exists and update quantity/price in place
+    for (int row = 0; row < dt.getRowCount(); row++) {
+        if (Name.equals(dt.getValueAt(row, 1))) {
+            dt.setValueAt(Quantity, row, 2);
+            dt.setValueAt(Price, row, 3);
+            isExisting = true;
+            break;
+        }
+    }
+
+    // If new item, append before total
+    if (!isExisting) {
+        int autoId = dt.getRowCount() + 1;
+        dt.addRow(new Object[]{autoId, Name, Quantity, Price});
+    }
+
+    // Recalculate Subtotal
+    double totalSum = 0.0;
+    for (int i = 0; i < dt.getRowCount(); i++) {
+        totalSum += Double.parseDouble(dt.getValueAt(i, 3).toString());
+    }
+
+    // Re-append the TOTAL row at the bottom
+    dt.addRow(new Object[]{"", "TOTAL", "", totalSum});
+    }
+    
+    
+
+
+
+
+    public double getSubtotal() {
+            DefaultTableModel dt = (DefaultTableModel) tbl1.getModel();
+            double total = 0.0;
+            for (int i = 0; i < dt.getRowCount(); i++) {
+                if (!"TOTAL".equals(dt.getValueAt(i, 1))) {
+                    total += Double.parseDouble(dt.getValueAt(i, 3).toString());
+                }
+            }
+            return total;
+    }
+    
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,24 +119,63 @@ public class cafe_jframe extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        cb3 = new javax.swing.JCheckBox();
-        cb1 = new javax.swing.JCheckBox();
-        cb2 = new javax.swing.JCheckBox();
-        txt1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txt2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txt3 = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        lblchange = new javax.swing.JLabel();
-        lbltot1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        lbl2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel17 = new javax.swing.JPanel();
+        lbl4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lbl5 = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        lbl7 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        lbl8 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        lbl3 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        lbl10 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
+        lbl11 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jLabel81 = new javax.swing.JLabel();
+        jPanel24 = new javax.swing.JPanel();
+        lbl12 = new javax.swing.JLabel();
+        jLabel86 = new javax.swing.JLabel();
+        jLabel87 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        lbl9 = new javax.swing.JLabel();
+        jLabel68 = new javax.swing.JLabel();
+        jLabel69 = new javax.swing.JLabel();
+        jPanel26 = new javax.swing.JPanel();
+        lbl6 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btn3 = new javax.swing.JButton();
         txtpay = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        btncalc = new javax.swing.JButton();
         btn1 = new javax.swing.JButton();
         btn2 = new javax.swing.JButton();
         btn5 = new javax.swing.JButton();
@@ -54,225 +184,561 @@ public class cafe_jframe extends javax.swing.JFrame {
         btn8 = new javax.swing.JButton();
         btn9 = new javax.swing.JButton();
         btn7 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
         btnx = new javax.swing.JButton();
         btnd = new javax.swing.JButton();
         btn0 = new javax.swing.JButton();
-        btnitems1 = new javax.swing.JButton();
         btnClearItems = new javax.swing.JButton();
+        btncalc = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 51, 51));
-        setForeground(new java.awt.Color(0, 51, 51));
+        setBackground(new java.awt.Color(18, 24, 36));
+        setForeground(new java.awt.Color(18, 24, 36));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel6.setBackground(new java.awt.Color(18, 18, 18));
+        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe Script", 3, 48)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/hip__4_-removebg-preview (1).png"))); // NOI18N
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, 270, 90));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 760, 80));
+
+        jPanel2.setBackground(new java.awt.Color(18, 18, 18));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cb3.setText("COKE = ₱25.00");
-        jPanel2.add(cb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 40));
+        jPanel4.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cb1.setText(" PIATOS = ₱22.00");
-        cb1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cb1ItemStateChanged(evt);
+        jLabel5.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel5.setText("$120");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 40, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(135, 116, 100));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 90, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel12.setText("Americano");
+        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+
+        lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__13_-removebg-preview_145x145.png"))); // NOI18N
+        lbl1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl1MousePressed(evt);
             }
         });
-        jPanel2.add(cb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, 40));
+        jPanel4.add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 110, 100));
 
-        cb2.setText("NOVA = ₱15.00");
-        jPanel2.add(cb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 40));
-        jPanel2.add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 90, -1));
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 110, 110));
 
-        jLabel1.setText("Qty:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 30, 20));
+        jPanel16.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Qty:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 30, 20));
-        jPanel2.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 90, -1));
+        lbl2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__14_-removebg-preview_145x145.png"))); // NOI18N
+        lbl2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl2MouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl2MousePressed(evt);
+            }
+        });
+        jPanel16.add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 110, 100));
 
-        jLabel3.setText("Qty:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 30, 20));
-        jPanel2.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 90, -1));
+        jLabel7.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel7.setText("$150");
+        jPanel16.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 170, 620));
+        jLabel8.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel8.setText("Cappuccino");
+        jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 110, 110));
 
-        lblchange.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblchange.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblchange.setText("Change: ₱0.00 ");
-        jPanel5.add(lblchange, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 300, 40));
+        jPanel17.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbltot1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbltot1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbltot1.setText("Total: ₱0.00 ");
-        jPanel5.add(lbltot1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 300, 50));
+        lbl4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__19_-removebg-preview_145x145.png"))); // NOI18N
+        lbl4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl4MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl4MousePressed(evt);
+            }
+        });
+        jPanel17.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 110, 110));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 330, 90));
+        jLabel11.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel11.setText("Matcha");
+        jPanel17.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 60, -1));
 
+        jLabel17.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel17.setText("$120");
+        jPanel17.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 40, -1));
+
+        jPanel2.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 110, 110));
+
+        jPanel18.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel18.setText("Espresso");
+        jPanel18.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 70, -1));
+
+        jLabel19.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel19.setText("$105");
+        jPanel18.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 40, -1));
+
+        lbl5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__17_-removebg-preview_145x145.png"))); // NOI18N
+        lbl5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl5MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl5MousePressed(evt);
+            }
+        });
+        jPanel18.add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 110));
+
+        jPanel2.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 110, 110));
+
+        jPanel19.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__7_-removebg-preview (1).png"))); // NOI18N
+        lbl7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl7MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl7MousePressed(evt);
+            }
+        });
+        jPanel19.add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 90));
+
+        jLabel56.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel56.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel56.setText("Croissant");
+        jPanel19.add(jLabel56, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 90, -1));
+
+        jLabel57.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel57.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel57.setText("$ 150");
+        jPanel19.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
+
+        jPanel2.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 110, 110));
+
+        jPanel20.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__8_-removebg-preview_145x145.png"))); // NOI18N
+        lbl8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl8MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl8MousePressed(evt);
+            }
+        });
+        jPanel20.add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 80));
+
+        jLabel62.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel62.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel62.setText(" Muffin");
+        jPanel20.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 70, -1));
+
+        jLabel63.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel63.setText("$135");
+        jPanel20.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
+
+        jPanel2.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 110, 110));
+
+        jPanel22.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__15_-removebg-preview_145x145.png"))); // NOI18N
+        lbl3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl3MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl3MousePressed(evt);
+            }
+        });
+        jPanel22.add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 110, 80));
+
+        jLabel9.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel9.setText("$170");
+        jPanel22.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 40, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel10.setText("Mocha");
+        jPanel22.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 60, -1));
+
+        jPanel2.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 110, 110));
+
+        jPanel21.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__10_-removebg-preview_145x145.png"))); // NOI18N
+        lbl10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl10MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl10MousePressed(evt);
+            }
+        });
+        jPanel21.add(lbl10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 100));
+
+        jLabel74.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel74.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel74.setText("Avo Toast");
+        jPanel21.add(jLabel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+
+        jLabel75.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel75.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel75.setText("$280");
+        jPanel21.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
+
+        jPanel2.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 110, 110));
+
+        jPanel23.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__11_-removebg-preview_145x145.png"))); // NOI18N
+        lbl11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl11MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl11MousePressed(evt);
+            }
+        });
+        jPanel23.add(lbl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 70));
+
+        jLabel80.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel80.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel80.setText("Grill cheese");
+        jPanel23.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+
+        jLabel81.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel81.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel81.setText("$230");
+        jPanel23.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
+
+        jPanel2.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 110, 110));
+
+        jPanel24.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__12_-removebg-preview_145x145.png"))); // NOI18N
+        lbl12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl12MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl12MousePressed(evt);
+            }
+        });
+        jPanel24.add(lbl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 100));
+
+        jLabel86.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel86.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel86.setText("Quiche");
+        jPanel24.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 60, -1));
+
+        jLabel87.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel87.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel87.setText("$190");
+        jPanel24.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 40, -1));
+
+        jPanel2.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 110, 110));
+
+        jPanel25.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__9_-removebg-preview_145x145.png"))); // NOI18N
+        lbl9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl9MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl9MousePressed(evt);
+            }
+        });
+        jPanel25.add(lbl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 90));
+
+        jLabel68.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel68.setText("Brownie");
+        jPanel25.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 70, -1));
+
+        jLabel69.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel69.setText("$120");
+        jPanel25.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
+
+        jPanel2.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 110, 110));
+
+        jPanel26.setBackground(new java.awt.Color(31, 26, 23));
+        jPanel26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/mavenproject1/images/images/Untitled_design__18_-removebg-preview_145x145.png"))); // NOI18N
+        lbl6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl6MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lbl6MousePressed(evt);
+            }
+        });
+        jPanel26.add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 100, 80));
+
+        jLabel50.setFont(new java.awt.Font("Segoe Script", 3, 14)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel50.setText("Irish Coffee");
+        jPanel26.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
+
+        jLabel51.setFont(new java.awt.Font("Segoe Script", 3, 12)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(135, 116, 100));
+        jLabel51.setText("$155");
+        jPanel26.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, -1));
+
+        jPanel2.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 110, 110));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 420, 560));
+
+        jPanel1.setBackground(new java.awt.Color(18, 18, 18));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn3.setBackground(new java.awt.Color(31, 26, 23));
         btn3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn3.setForeground(new java.awt.Color(135, 116, 100));
         btn3.setText("3");
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn3ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 70, 50));
+        jPanel1.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 90, 50));
 
+        txtpay.setBackground(new java.awt.Color(26, 32, 44));
         txtpay.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtpay.setEnabled(false);
         jPanel1.add(txtpay, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 180, 40));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(135, 116, 100));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Payment: ");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 40));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 140, 40));
 
-        btncalc.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btncalc.setText("₱");
-        btncalc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncalcActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btncalc, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 60, 80));
-
+        btn1.setBackground(new java.awt.Color(31, 26, 23));
         btn1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn1.setForeground(new java.awt.Color(135, 116, 100));
         btn1.setText("1");
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 70, 50));
+        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 90, 50));
 
+        btn2.setBackground(new java.awt.Color(31, 26, 23));
         btn2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn2.setForeground(new java.awt.Color(135, 116, 100));
         btn2.setText("2");
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 70, 50));
+        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 90, 50));
 
+        btn5.setBackground(new java.awt.Color(31, 26, 23));
         btn5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn5.setForeground(new java.awt.Color(135, 116, 100));
         btn5.setText("5");
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn5ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 70, 50));
+        jPanel1.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 90, 50));
 
+        btn4.setBackground(new java.awt.Color(31, 26, 23));
         btn4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn4.setForeground(new java.awt.Color(135, 116, 100));
         btn4.setText("4");
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn4ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 70, 50));
+        jPanel1.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, 50));
 
+        btn6.setBackground(new java.awt.Color(31, 26, 23));
         btn6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn6.setForeground(new java.awt.Color(135, 116, 100));
         btn6.setText("6");
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn6ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 70, 50));
+        jPanel1.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 90, 50));
 
+        btn8.setBackground(new java.awt.Color(31, 26, 23));
         btn8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn8.setForeground(new java.awt.Color(135, 116, 100));
         btn8.setText("8");
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn8ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 70, 50));
+        jPanel1.add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 90, 50));
 
+        btn9.setBackground(new java.awt.Color(31, 26, 23));
         btn9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn9.setForeground(new java.awt.Color(135, 116, 100));
         btn9.setText("9");
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn9ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 70, 50));
+        jPanel1.add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 90, 50));
 
+        btn7.setBackground(new java.awt.Color(31, 26, 23));
         btn7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn7.setForeground(new java.awt.Color(135, 116, 100));
         btn7.setText("7");
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn7ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 70, 50));
+        jPanel1.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, 50));
 
-        jButton21.setText("9");
-        jButton21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton21, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 70, 50));
-
+        btnx.setBackground(new java.awt.Color(31, 26, 23));
+        btnx.setForeground(new java.awt.Color(135, 116, 100));
         btnx.setText("⌫");
         btnx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnxActionPerformed(evt);
             }
         });
-        jPanel1.add(btnx, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 60, 80));
+        jPanel1.add(btnx, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 90, 50));
 
+        btnd.setBackground(new java.awt.Color(31, 26, 23));
         btnd.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnd.setForeground(new java.awt.Color(135, 116, 100));
         btnd.setText(".");
         btnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndActionPerformed(evt);
             }
         });
-        jPanel1.add(btnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 70, 50));
+        jPanel1.add(btnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 90, 50));
 
+        btn0.setBackground(new java.awt.Color(31, 26, 23));
         btn0.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn0.setForeground(new java.awt.Color(135, 116, 100));
         btn0.setText("0");
         btn0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn0ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 70, 50));
+        jPanel1.add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 90, 50));
 
-        btnitems1.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        btnitems1.setText("Calculate Total Items ");
-        btnitems1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnitems1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnitems1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 140, 50));
-
+        btnClearItems.setBackground(new java.awt.Color(31, 26, 23));
         btnClearItems.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        btnClearItems.setForeground(new java.awt.Color(135, 116, 100));
         btnClearItems.setText("Clear Items");
         btnClearItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearItemsActionPerformed(evt);
             }
         });
-        jPanel1.add(btnClearItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 140, 50));
+        jPanel1.add(btnClearItems, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 190, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 330, 520));
+        btncalc.setBackground(new java.awt.Color(31, 26, 23));
+        btncalc.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btncalc.setForeground(new java.awt.Color(135, 116, 100));
+        btncalc.setText("₱");
+        btncalc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncalcActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btncalc, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 90, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 330, 370));
+
+        tbl1.setBackground(new java.awt.Color(18, 18, 18));
+        tbl1.setForeground(new java.awt.Color(135, 116, 100));
+        tbl1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Product", "Quantity", "Price"
+            }
+        ));
+        tbl1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbl1.setEnabled(false);
+        tbl1.setGridColor(new java.awt.Color(18, 18, 18));
+        tbl1.setSelectionBackground(new java.awt.Color(18, 18, 18));
+        tbl1.setSelectionForeground(new java.awt.Color(135, 116, 100));
+        tbl1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tbl1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 330, 180));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
         private String paymentInput = "";
         private double orderTotal = 0;
-
+        
 
     
     
@@ -284,18 +750,64 @@ public class cafe_jframe extends javax.swing.JFrame {
     private void btncalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcActionPerformed
          // TODO add your handling code here:
    try {
-        double pay = Double.parseDouble(txtpay.getText());
+        double total = getSubtotal();
 
-        if (pay < orderTotal) {
-            JOptionPane.showMessageDialog(rootPane, "Insufficient Funds!", "Cafeteria", JOptionPane.INFORMATION_MESSAGE);
+        if (total == 0) {
+            JOptionPane.showMessageDialog(rootPane, "No items in cart!", "Bountiful Cafe", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        double change = pay - orderTotal;
-        lblchange.setText(String.format("Change: ₱%.2f", change));
+        if (txtpay.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Please enter payment amount!", "Bountiful Cafe", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        double pay = Double.parseDouble(txtpay.getText());
+
+        if (pay < total) {
+            JOptionPane.showMessageDialog(rootPane, "Insufficient Cash!", "Bountiful Cafe", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        double change = pay - total;
+
+        // Build itemized receipt text
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("=========================================\n");
+        receipt.append("             BOUNTIFUL CAFE RECEIPT            \n");
+        receipt.append("=========================================\n");
+        receipt.append(String.format("%-20s %-8s %-10s\n", "Item", "Qty", "Price"));
+        receipt.append("-----------------------------------------------------------------\n");
+
+        DefaultTableModel dt = (DefaultTableModel) tbl1.getModel();
+        for (int i = 0; i < dt.getRowCount(); i++) {
+            String name = dt.getValueAt(i, 1).toString();
+            if (!"TOTAL".equals(name)) {
+                String qty = dt.getValueAt(i, 2).toString();
+                double price = Double.parseDouble(dt.getValueAt(i, 3).toString());
+                receipt.append(String.format("%-20s %-8s ₱%.2f\n", name, qty, price));
+            }
+        }
+
+        receipt.append("=========================================\n");
+        receipt.append(String.format(" Total Amount:                      ₱%.2f\n", total));
+        receipt.append(String.format(" Cash:                              ₱%.2f\n", pay));
+        receipt.append(String.format(" Change:                            ₱%.2f\n", change));
+        receipt.append("=========================================\n");
+        receipt.append("        Thank you for dining with us!        ");
+
+        // Display receipt in a monospaced font format
+        JTextArea textArea = new JTextArea(receipt.toString());
+        textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        textArea.setEditable(false);
+
+        JOptionPane.showMessageDialog(rootPane, textArea, "Order Receipt", JOptionPane.INFORMATION_MESSAGE);
+
+        // Reset frame for next order
+        btnClearItemsActionPerformed(null);
 
     } catch (NumberFormatException e) {
-        lblchange.setText("Enter payment first!");
+        JOptionPane.showMessageDialog(rootPane, "Please enter a valid amount!", "Bountiful Cafe", JOptionPane.ERROR_MESSAGE);
     }
 
 
@@ -339,18 +851,18 @@ public class cafe_jframe extends javax.swing.JFrame {
     paymentInput += "7";
     txtpay.setText(paymentInput);    }//GEN-LAST:event_btn7ActionPerformed
 
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton21ActionPerformed
-
     private void btnxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxActionPerformed
         // TODO add your handling code here:
-           paymentInput = "";
-    txtpay.setText("");
+if (!paymentInput.isEmpty()) {
+        paymentInput = paymentInput.substring(0, paymentInput.length() - 1);
+        txtpay.setText(paymentInput);
+    }
     }//GEN-LAST:event_btnxActionPerformed
 
     private void btndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndActionPerformed
         // TODO add your handling code here:
+                    paymentInput += ".";
+    txtpay.setText(paymentInput);
     }//GEN-LAST:event_btndActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
@@ -359,84 +871,181 @@ public class cafe_jframe extends javax.swing.JFrame {
     txtpay.setText(paymentInput);
     }//GEN-LAST:event_btn0ActionPerformed
 
-    private void cb1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb1ItemStateChanged
-        }//GEN-LAST:event_cb1ItemStateChanged
-
-    private void btnitems1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnitems1ActionPerformed
-        // TODO add your handling code here:
-            int piaPrice = 22;
-    int novaPrice = 15;
-    int cokePrice = 25;
-    
-    orderTotal = 0;
-
-    if (cb1.isSelected()) {
-        try 
-        {
-            String text = txt1.getText().trim();
-            int qty1 = text.isEmpty() ? 0 : Integer.parseInt(text);
-            
-            if (qty1 >= 1) {
-                orderTotal += (piaPrice * qty1);
-            }
-        } 
-        catch (NumberFormatException e)
-        {
-            
-        }
-    }
-    if (cb2.isSelected()) 
-    {
-        try 
-        {
-            String text = txt2.getText().trim();
-            int qty2 = text.isEmpty() ? 0 : Integer.parseInt(text);
-            
-            if (qty2 >= 1) {
-                orderTotal += (novaPrice * qty2);
-            }
-        } catch (NumberFormatException e) {
-        }
-    }
-    if (cb3.isSelected())
-    {
-        try {
-            String text = txt3.getText().trim();
-            int qty3 = text.isEmpty() ? 0 : Integer.parseInt(text);
-            
-            if (qty3 >= 1) {
-                orderTotal += (cokePrice * qty3); 
-            }
-        } catch (NumberFormatException e) {
-        }
-    }
-
-    lbltot1.setText(String.format("Total: ₱%.2f", orderTotal));
-    }//GEN-LAST:event_btnitems1ActionPerformed
-
     private void btnClearItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearItemsActionPerformed
-        // TODO add your handling code here:
-          // Clear payment
     paymentInput = "";
     txtpay.setText("");
 
-    // Reset total
-    orderTotal = 0;
+    // Clear JTable rows
+    DefaultTableModel dt = (DefaultTableModel) tbl1.getModel();
+    dt.setRowCount(0);
 
-    // Clear quantities
-    txt1.setText("0");
-    txt2.setText("0");
-    txt3.setText("0");
+    // Reset item counter variables
+    americanoQty = 0;
+    q2 = 0;
+    q3 = 0;
+    q4 = 0;
+    q5 = 0;
+    q6 = 0;
+    q7 = 0;
+    q8 = 0;
+    q9 = 0;
+    q10 = 0;
+    q11 = 0;
+    q12 = 0;
 
-    // Uncheck items
-    cb1.setSelected(false);
-    cb2.setSelected(false);
-    cb3.setSelected(false);
-
-    // Clear displayed totals/change
-    lbltot1.setText("Total: ₱0.00");
-    lblchange.setText("Change: ₱0.00");
     }//GEN-LAST:event_btnClearItemsActionPerformed
+
+    private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
+        // TODO add your handling code here:
+
+        
+        
+        
+    }//GEN-LAST:event_lbl1MouseClicked
+
+    private void lbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl2MouseClicked
+
+    private void lbl3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl3MouseClicked
+
+    private void lbl4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl4MouseClicked
+
+    private void lbl5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl5MouseClicked
+
+    private void lbl6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl6MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl6MouseClicked
+
+    private void lbl7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl7MouseClicked
+
+    private void lbl8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl8MouseClicked
+
+    private void lbl9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl9MouseClicked
+
+    private void lbl10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl10MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl10MouseClicked
+
+    private void lbl11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl11MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl11MouseClicked
+
+    private void lbl12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl12MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl12MouseClicked
+
+    private void lbl1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MousePressed
+        // TODO add your handling code here:
+                americanoQty++;
+        lbl1.setText(String.valueOf(americanoQty));
+        addtable("Americano", americanoQty, 120 * americanoQty);
+    }//GEN-LAST:event_lbl1MousePressed
+
+    private void lbl2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl2MouseEntered
+
+    private void lbl2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MousePressed
+        // TODO add your handling code here:
+                      q2++;
+        lbl2.setText(String.valueOf(q2));
+        addtable("Cappuccino", q2, 150 * q2);
+    }//GEN-LAST:event_lbl2MousePressed
+
+    private void lbl3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MousePressed
+        // TODO add your handling code here:
+                              q3++;
+        lbl3.setText(String.valueOf(q3));
+        addtable("Mocha", q3, 170 * q3);
+    }//GEN-LAST:event_lbl3MousePressed
+
+    private void lbl4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MousePressed
+        // TODO add your handling code here:
+                              q4++;
+        lbl4.setText(String.valueOf(q4));
+        addtable("Matcha", q4, 120 * q4);
+    }//GEN-LAST:event_lbl4MousePressed
+
+    private void lbl5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MousePressed
+        // TODO add your handling code here:
+                              q5++;
+        lbl5.setText(String.valueOf(q5));
+        addtable("Espresso", q5, 105 * q5);
+    }//GEN-LAST:event_lbl5MousePressed
+
+    private void lbl6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl6MousePressed
+        // TODO add your handling code here:\
+                              q6++;
+        lbl6.setText(String.valueOf(q6));
+        addtable("Irish Coffee", q6, 155 * q6);
+    }//GEN-LAST:event_lbl6MousePressed
+
+    private void lbl7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MousePressed
+        // TODO add your handling code here:
+                              q7++;
+        lbl7.setText(String.valueOf(q7));
+        addtable("Croissant", q7, 150 * q7);
+    }//GEN-LAST:event_lbl7MousePressed
+
+    private void lbl8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MousePressed
+        // TODO add your handling code here:
+                              q8++;
+        lbl8.setText(String.valueOf(q8));
+        addtable("Muffin", q8, 135 * q8);
+    }//GEN-LAST:event_lbl8MousePressed
+
+    private void lbl9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MousePressed
+        // TODO add your handling code here:
+        
+                      q9++;
+        lbl9.setText(String.valueOf(q9));
+        addtable("Brownie", q9, 120 * q9);
+    }//GEN-LAST:event_lbl9MousePressed
+
+    private void lbl10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl10MousePressed
+        // TODO add your handling code here:
+                              q10++;
+        lbl10.setText(String.valueOf(q10));
+        addtable("Avocado Toast", q10, 280 * q10);
+    }//GEN-LAST:event_lbl10MousePressed
+
+    private void lbl11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl11MousePressed
+        // TODO add your handling code here:
+                              q11++;
+        lbl11.setText(String.valueOf(q11));
+        addtable("Grilled Cheese Panini", q11, 230 * q11);
+    }//GEN-LAST:event_lbl11MousePressed
+
+    private void lbl12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl12MousePressed
+        // TODO add your handling code here:
+                              q12++;
+        lbl12.setText(String.valueOf(q12));
+        addtable("Quiche", q12, 190 * q12);
+        
+    }//GEN-LAST:event_lbl12MousePressed
 
     /**
      * @param args the command line arguments
@@ -469,6 +1078,16 @@ public class cafe_jframe extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new cafe_jframe().setVisible(true);
+                        try {
+    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+            javax.swing.UIManager.setLookAndFeel(info.getClassName());
+            break;
+        }
+    }
+} catch (Exception ex) {
+    System.err.println("Failed to initialize LaF");
+}
             }
         });
     }
@@ -487,24 +1106,64 @@ public class cafe_jframe extends javax.swing.JFrame {
     private javax.swing.JButton btnClearItems;
     private javax.swing.JButton btncalc;
     private javax.swing.JButton btnd;
-    private javax.swing.JButton btnitems1;
     private javax.swing.JButton btnx;
-    private javax.swing.JCheckBox cb1;
-    private javax.swing.JCheckBox cb2;
-    private javax.swing.JCheckBox cb3;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel69;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JLabel lblchange;
-    private javax.swing.JLabel lbltot1;
-    private javax.swing.JTextField txt1;
-    private javax.swing.JTextField txt2;
-    private javax.swing.JTextField txt3;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl10;
+    private javax.swing.JLabel lbl11;
+    private javax.swing.JLabel lbl12;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lbl4;
+    private javax.swing.JLabel lbl5;
+    private javax.swing.JLabel lbl6;
+    private javax.swing.JLabel lbl7;
+    private javax.swing.JLabel lbl8;
+    private javax.swing.JLabel lbl9;
+    private javax.swing.JTable tbl1;
     private javax.swing.JTextField txtpay;
     // End of variables declaration//GEN-END:variables
 }
